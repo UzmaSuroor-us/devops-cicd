@@ -9,7 +9,7 @@ pipeline {
 
         stage('Checkout') {
             steps {
-                git 'https://github.com/yourusername/tech-api.git'
+                git 'https://github.com/UzmaSuroor-us/devops-cicd.git'
             }
         }
 
