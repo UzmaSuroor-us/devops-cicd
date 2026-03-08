@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tech-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: tech-api
+  template:
+    metadata:
+      labels:
+        app: tech-api
+    spec:
+      containers:
+      - name: tech-api
+        image: uzzu/tech-api:latest
+        ports:
+        - containerPort: 5000
