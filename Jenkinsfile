@@ -1,34 +1,20 @@
 pipeline {
     agent any
 
-    environment {
-        IMAGE_NAME = "uzzu/tech-api"
-    }
-
     stages {
-
-        stage('Checkout') {
-            steps {
-                git 'https://github.com/UzmaSuroor-us/devops-cicd.git'
-            }
-        }
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t $IMAGE_NAME:$BUILD_NUMBER .'
-            }
-        }
-
-        stage('Push Image') {
-            steps {
-                sh 'docker push $IMAGE_NAME:$BUILD_NUMBER'
+                sh 'docker build -t tech-api:latest .'
             }
         }
 
         stage('Deploy to Kubernetes') {
             steps {
-                sh 'kubectl apply -f k8s/'
+                sh 'kubectl apply -f k8s/deployment.yaml'
+                sh 'kubectl apply -f k8s/service.yaml'
             }
         }
+
     }
 }
